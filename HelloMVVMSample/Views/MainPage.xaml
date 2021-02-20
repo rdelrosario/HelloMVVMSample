@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HelloMVVMSample.Views.MainPage"
+             xmlns:viewModels="clr-namespace:HelloMVVMSample.ViewModels"
+             xmlns:services="clr-namespace:HelloMVVMSample.Services">
+<ContentPage.BindingContext>
+    <viewModels:MainViewModel>
+        <x:Arguments>
+            <services:AlertService/>
+        </x:Arguments>
+    </viewModels:MainViewModel>
+</ContentPage.BindingContext>
+<Grid VerticalOptions="Center" HorizontalOptions="Center" RowDefinitions="Auto, Auto ,Auto, Auto, Auto, Auto">
+    <Entry Grid.Row="0" Placeholder="Firstname" Text="{Binding User.FirstName}"/>
+    <Entry Grid.Row="1" Placeholder="Lastname" Text="{Binding User.LastName}"/>
+    <Button Grid.Row="2" Text="Login" Command="{Binding LoginCommand}"/>
+    <Image  Grid.Row="3" Source="intec" Rotation="{Binding Source={x:Reference slider}, Path=Value}">
+        <Image.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding CountCommand}" />
+        </Image.GestureRecognizers>
+    </Image>
+    <Slider Grid.Row="4" Maximum="360" Minimum="0" x:Name="slider"/>
+    <Label  Grid.Row="5" FontSize="50" FontAttributes="Bold" Text="{Binding Count}"/>
+</Grid>
+
+</ContentPage>
